@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">PicassoDemo</string>
+
+    <string name="load_img">加载图片</string>
+
+</resources>
