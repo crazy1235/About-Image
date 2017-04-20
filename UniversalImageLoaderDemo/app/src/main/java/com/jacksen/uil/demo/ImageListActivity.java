@@ -1,9 +1,15 @@
 package com.jacksen.uil.demo;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.ListViewCompat;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ListView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
 public class ImageListActivity extends AppCompatActivity {
 
@@ -23,5 +29,10 @@ public class ImageListActivity extends AppCompatActivity {
         adapter = new ImageRecyclerAdapter(this, Constants.IMG_LIST);
 
         recyclerView.setAdapter(adapter);
+
+        recyclerView.addOnScrollListener(new RVPauseOnScrollListener(ImageLoader.getInstance(), true, true));
+
+        ListView listView = new ListView(this);
+        listView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), true, true));
     }
 }
