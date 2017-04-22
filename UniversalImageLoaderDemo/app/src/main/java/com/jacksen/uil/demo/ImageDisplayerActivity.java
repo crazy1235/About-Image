@@ -1,22 +1,20 @@
 package com.jacksen.uil.demo;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.RoundedVignetteBitmapDisplayer;
-import com.nostra13.universalimageloader.core.process.BitmapProcessor;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 public class ImageDisplayerActivity extends AppCompatActivity {
 
@@ -55,6 +53,13 @@ public class ImageDisplayerActivity extends AppCompatActivity {
 //                .bitmapConfig(Bitmap.Config.RGB_565) // bitmap模式
 //                .displayer(new RoundedBitmapDisplayer(20)) // 设置图片显示形式(圆角 or 渐变等)
                 .build();
+
+        ImageLoader.getInstance().loadImage("xxxx", new SimpleImageLoadingListener(){
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                super.onLoadingComplete(imageUri, view, loadedImage);
+            }
+        });
 
         ImageLoader.getInstance().displayImage(Constants.IMG_LIST.get(5), imageView1, options);
 
