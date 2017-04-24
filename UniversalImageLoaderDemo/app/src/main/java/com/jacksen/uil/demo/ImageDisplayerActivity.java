@@ -1,20 +1,18 @@
 package com.jacksen.uil.demo;
 
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import com.nostra13.universalimageloader.core.display.RoundedVignetteBitmapDisplayer;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.nostra13.universalimageloader.utils.StorageUtils;
 
 public class ImageDisplayerActivity extends AppCompatActivity {
 
@@ -29,6 +27,11 @@ public class ImageDisplayerActivity extends AppCompatActivity {
         imageView2 = (ImageView) findViewById(R.id.image_view2);
         imageView3 = (ImageView) findViewById(R.id.image_view3);
         imageView4 = (ImageView) findViewById(R.id.image_view4);
+
+
+        Log.d("ImageDisplayerActivity", StorageUtils.getCacheDirectory(this).getPath());
+        Log.d("ImageDisplayerActivity", "StorageUtils.getCacheDirectory(this, false):" + StorageUtils.getCacheDirectory(this, false));
+
 
         init();
     }
@@ -54,12 +57,12 @@ public class ImageDisplayerActivity extends AppCompatActivity {
 //                .displayer(new RoundedBitmapDisplayer(20)) // 设置图片显示形式(圆角 or 渐变等)
                 .build();
 
-        ImageLoader.getInstance().loadImage("xxxx", new SimpleImageLoadingListener(){
+        /*ImageLoader.getInstance().loadImage("xxxx", new SimpleImageLoadingListener(){
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                 super.onLoadingComplete(imageUri, view, loadedImage);
             }
-        });
+        });*/
 
         ImageLoader.getInstance().displayImage(Constants.IMG_LIST.get(5), imageView1, options);
 
@@ -70,7 +73,7 @@ public class ImageDisplayerActivity extends AppCompatActivity {
         ImageLoader.getInstance().displayImage(Constants.IMG_LIST.get(1), imageView2, options);
 
 
-        options = new DisplayImageOptions.Builder().cloneFrom(options)
+        /*options = new DisplayImageOptions.Builder().cloneFrom(options)
                 .displayer(new FadeInBitmapDisplayer(2000))
                 .build();
 
@@ -80,7 +83,7 @@ public class ImageDisplayerActivity extends AppCompatActivity {
                 .displayer(new RoundedVignetteBitmapDisplayer(20, 20))
                 .build();
 
-        ImageLoader.getInstance().displayImage(Constants.IMG_LIST.get(3), imageView4, options);
+        ImageLoader.getInstance().displayImage(Constants.IMG_LIST.get(3), imageView4, options);*/
     }
 
     @Override
@@ -92,11 +95,15 @@ public class ImageDisplayerActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         if (item.getGroupId() == R.id.action_refresh) {
             ImageLoader.getInstance().clearMemoryCache();
             ImageLoader.getInstance().clearDiskCache();
-            init();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    init();
+                }
+            }, 2000);
             return true;
         }
 

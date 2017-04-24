@@ -3,12 +3,8 @@ package com.jacksen.uil.demo;
 import android.app.Application;
 import android.content.Context;
 
-import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
-import com.nostra13.universalimageloader.cache.disc.impl.ext.LruDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
-import com.nostra13.universalimageloader.cache.memory.LimitedMemoryCache;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
-import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -33,7 +29,7 @@ public class BaseApplication extends Application {
 
     private void initImageLoader(Context context) {
 
-        File cacheDir = StorageUtils.getOwnCacheDirectory(getApplicationContext(), "imageloader/Cache");
+        File cacheDir = StorageUtils.getOwnCacheDirectory(getApplicationContext(), "imageLoader/Cache");
 
         /*ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(this);
         ImageLoader.getInstance().init(configuration);*/
@@ -48,7 +44,7 @@ public class BaseApplication extends Application {
         builder.memoryCacheSize(5 * 1024 * 1024);  // 内存缓存大小
         builder.memoryCacheExtraOptions(480, 800); // 内存缓存中每个图片的最大宽高
         builder.memoryCacheSizePercentage(50); // 内存缓存占总内存的百分比
-        builder.diskCache(new UnlimitedDiskCache(cacheDir)); // 设置磁盘缓存策略
+//        builder.diskCache(new UnlimitedDiskCache(cacheDir)); // 设置磁盘缓存策略
         builder.diskCacheSize(50 * 1024 * 1024); // 设置磁盘缓存的大小
         builder.diskCacheFileCount(50); // 磁盘缓存文件数量
         builder.diskCacheFileNameGenerator(new Md5FileNameGenerator()); // 磁盘缓存时图片名称加密方式
