@@ -2,7 +2,7 @@
 
 ---
 
-[**上篇文章**](http://blog.csdn.net/crazy1235/article/details/70312924)介绍 displayImage() 这个重要的方法时，重要涉及到 ProcessAndDisplayImageTask （处理和显示图片任务）和 LoadAndDisplayImageTask（加载显示图片任务） 这两个任务。
+[Universal Image Loader 源码解析之总体流程](README_2.md) 介绍 displayImage() 这个重要的方法时，重要涉及到 ProcessAndDisplayImageTask （处理和显示图片任务）和 LoadAndDisplayImageTask（加载显示图片任务） 这两个任务。
 
 ---
 
